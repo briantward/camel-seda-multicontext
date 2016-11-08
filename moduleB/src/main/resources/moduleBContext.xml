@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+
+  <camelContext id="moduleBCamelContext" xmlns="http://camel.apache.org/schema/spring">
+  	<!-- <template id="template" />  -->
+    <route>
+    	<from uri="seda:somewhere"/>
+    	<log message="Got message in Module B" loggingLevel="INFO"/>
+    	<to uri="seda:sedaQueueFromModuleB" />
+    </route>
+    
+    <route>
+    	<from uri="seda:sedaQueueFromModuleB"/>
+    	<log message="Got message in sedaQueueFromModuleB" />
+    </route>
+    
+  </camelContext>
+
+</beans>
